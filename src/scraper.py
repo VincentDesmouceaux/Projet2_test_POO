@@ -1,5 +1,6 @@
-from categorie import Categorie
-from livre import Livre
+from .categorie import Categorie
+from .livre import Livre
+
 import csv
 import os
 
@@ -14,7 +15,8 @@ class Scraper:
             os.makedirs(self.data_folder)
 
         # Extraction des informations pour toutes les catégories depuis la page d'accueil
-        all_category_links = Categorie(self.base_url).extract_links()
+        # Dans votre méthode scrape() de la classe Scraper
+        all_category_links = Categorie(self.base_url).extract_category_links()
 
         for category_link in all_category_links:
             print(f"Processing category: {category_link}")
