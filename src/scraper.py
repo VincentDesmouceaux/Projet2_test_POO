@@ -1,5 +1,7 @@
 from .categorie import Categorie
 from .livre import Livre
+from .imageDownLoader import ImageDownloader
+
 
 import csv
 import os
@@ -35,7 +37,7 @@ class Scraper:
             if not all_product_links:
                 print("No product links found for this category.")
                 continue
-
+            imageDownLoader = ImageDownloader(self.data_folder)
             all_product_info = []
             for product_link in all_product_links:
                 print(f"Processing product link: {product_link}")
@@ -43,6 +45,14 @@ class Scraper:
                 if not product_info:
                     print(f"Error processing product link: {product_link}")
                     continue
+
+                image_url = product_info['image_url']  # Assurez-vous que 'image_url' est la clé correcte
+                book_title = product_info['title']  # Assurez-vous que 'title' est la clé correcte
+                print(f"Downloading image from URL: {image_url}")
+                image_path = imageDownLoader.download_image(image_url, category_name, book_title)    
+                if image_path:
+                    print(f"Image successfully downloaded: {image_path}")
+
                 all_product_info.append(product_info)
 
             if not all_product_info:

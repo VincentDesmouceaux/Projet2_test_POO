@@ -20,6 +20,8 @@ class ImageDownloader:
                 with open(destination_path, 'wb') as image_file:
                     image_file.write(image_data)
                 print(f"Image downloaded: {image_name}")
+                print(f"Image downloaded and saved to {destination_path}")
+                print(f"Image URL: {image_url}")
                 return destination_path
         except Exception as e:
             print(f"Error downloading image: {image_url}. {str(e)}")

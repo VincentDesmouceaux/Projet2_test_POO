@@ -18,8 +18,7 @@ class Livre:
             number_available = soup.find('th', string='Availability').find_next('td').text.strip()
             product_description = soup.find('meta', attrs={'name': 'description'})['content'].strip() if soup.find('meta', attrs={'name': 'description'}) else None
             review_rating = soup.find('p', class_='star-rating')['class'][1] if soup.find('p', class_='star-rating') else None
-            image_url = urljoin(self.url, soup.find('div', class_='item active').img['src'].replace('../../', '')) if soup.find('div', class_='item active') and soup.find('div', class_='item active').img else None
-
+            image_url = urljoin(self.url, soup.find('img')['src'])
             return {
                 'product_page_url': self.url,
                 'upc': upc,
